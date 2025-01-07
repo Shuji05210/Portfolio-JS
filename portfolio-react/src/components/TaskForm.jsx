@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import '../index.css';
@@ -31,11 +31,13 @@ export const TaskForm = () => {
         return '';  // 全ての値が選択されていない場合は空文字
     };
 
-    //初回レンダリング時 ユーザー情報取得
-    useEffect(() => {
+
+    // ユーザー情報を取得する処理（ログインチェック）
+    const getUserInfo = () => {
         const token = localStorage.getItem('authToken');
         if (!token) {
-            navigate('/login'); // ログインしていない場合、ログインページへリダイレクト
+            navigate('/login'); // トークンがなければログインページへ遷移
+            return;
         }
 
         axios
@@ -50,8 +52,7 @@ export const TaskForm = () => {
             .catch(() => {
                 navigate('/login'); // ユーザー情報取得に失敗した場合、ログインページに遷移
             });
-    }, [navigate]);
-
+    };
 
     // フォーム送信時の処理
     const handleSubmit = async (e) => {
@@ -78,8 +79,8 @@ export const TaskForm = () => {
 
 
         // LaravelのAPIにデータを送信
-        axios.post('http://127.0.0.1:8000/api/tasks', taskData, 
-        {headers: {Authorization: `Bearer ${token}`,},}) // Laravel APIのURL を記述
+        axios.post('http://127.0.0.1:8000/api/tasks', taskData,
+            { headers: { Authorization: `Bearer ${token}`, }, }) // Laravel APIのURL を記述
 
             .then((response) => {
                 // 送信成功のコンソール表示を行う
@@ -114,7 +115,10 @@ export const TaskForm = () => {
     const markStyle = "text-black text-xl text-red-800";
 
     // コンポーネントの初回レンダリング時にユーザー情報を取得
-    
+    React.useEffect(() => {
+        getUserInfo();
+    }, []);
+
     return (
         <div className="max-w-4xl mx-auto mt-10
          p-4 bg-indigo-100 shadow-lg rounded-lg flex flex-col">
