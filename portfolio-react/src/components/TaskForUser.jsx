@@ -60,7 +60,7 @@ export const TaskForUser = () => {
         <>
             <div className="w-1/2 text-center mx-auto bg-green-200 p-4 rounded-xl">
                 <h1 className="text-blue-800 text-center text-xl font-bold mb-3">
-                    特定のユーザーのものを表示</h1>
+                    指定したユーザーIDの タスクのみを表示</h1>
 
                 {/* セレクトボックス */}
                 <label className="text-xl mr-2">User ID</label>

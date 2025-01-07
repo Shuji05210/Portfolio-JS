@@ -12,6 +12,8 @@ import { TaskForUser } from "./components/TaskForUser";
 
 import { List2 } from "./components/List2";
 
+import { UserCreate } from "./components/UserCreate";
+import { Login } from "./components/Login";
 
 export const App = () => {
   return (
@@ -21,11 +23,15 @@ export const App = () => {
 
         <Routes>
 
-          <Route path="/" element={<TaskForm></TaskForm>} />
+          <Route path="/taskform" element={<TaskForm></TaskForm>} />
 
           <Route path="/list" element={<List2></List2>} />
 
           <Route path="/listuser" element={<TaskForUser></TaskForUser>} />
+
+          <Route path="/usercreate" element={<UserCreate></UserCreate>} />
+ 
+          <Route path="/login" element= {<Login></Login>}/>
 
 
           {/* リスト2 全体のタスク表示と編集更新 */}
@@ -39,6 +45,7 @@ export const App = () => {
           {/* <TaskForm></TaskForm> */}
         </Routes >
       </Router>
+      説明を書いていく
     </>
   );
 }

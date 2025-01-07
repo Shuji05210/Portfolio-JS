@@ -1,25 +1,17 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import '../index.css';
 
 // サンプルのユーザーデータ (仮)
-const users = [
-    { id: 1, name: "ユーザー 01" },
-    { id: 2, name: "ユーザー 02" },
-    { id: 3, name: "ユーザー 03" },
-    { id: 4, name: "ユーザー 04" },
-    { id: 5, name: "ユーザー 05" },
-    { id: 6, name: "ユーザー 06" },
-    { id: 7, name: "ユーザー 07" },
-    { id: 8, name: "ユーザー 08" },
-    { id: 9, name: "ユーザー 09" },
-    { id: 10, name: "ユーザー 10" },
-];
 
 export const TaskForm = () => {
+
+    const [user, setUser] = useState(null);
+    const navigate = useNavigate();
+
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [userId, setUserId] = useState("");
     const [taskstateId, setTaskstateId] = useState("");
     const [categoryId, setCategoryId] = useState("");
     const [priority, setPriority] = useState("");
@@ -39,9 +31,38 @@ export const TaskForm = () => {
         return '';  // 全ての値が選択されていない場合は空文字
     };
 
+    //初回レンダリング時 ユーザー情報取得
+    useEffect(() => {
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            navigate('/login'); // ログインしていない場合、ログインページへリダイレクト
+        }
+
+        axios
+            .get('http://127.0.0.1:8000/api/user', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((response) => {
+                setUser(response.data); // ログインユーザー情報の取得
+            })
+            .catch(() => {
+                navigate('/login'); // ユーザー情報取得に失敗した場合、ログインページに遷移
+            });
+    }, [navigate]);
+
+
     // フォーム送信時の処理
     const handleSubmit = async (e) => {
         e.preventDefault(); //ページのリロードを防ぐ
+
+        if (!user) {
+            setError('ユーザー情報がありません');
+            return;
+        }
+
+        const token = localStorage.getItem('authToken');
 
         // フォームデータ データベーステーブルに送られるもの
         // taskDataという配列の中に各項目のデータが入る
@@ -50,13 +71,15 @@ export const TaskForm = () => {
             description,
             priority,
             due_date: getDueDate(),
-            user_id: userId,
+            user_id: user.id,
             taskstate_id: taskstateId,
             category_id: categoryId,
         };
 
+
         // LaravelのAPIにデータを送信
-        axios.post('http://127.0.0.1:8000/api/tasks', taskData) // Laravel APIのURL を記述
+        axios.post('http://127.0.0.1:8000/api/tasks', taskData, 
+        {headers: {Authorization: `Bearer ${token}`,},}) // Laravel APIのURL を記述
 
             .then((response) => {
                 // 送信成功のコンソール表示を行う
@@ -71,13 +94,10 @@ export const TaskForm = () => {
                 setYear('');
                 setMonth('');
                 setDay('');
-                setUserId('');
-
-                
-
             })
 
             .catch((error) => {
+                setError('タスクの作成に失敗しました');
                 console.log('エラーが発生しました:', error);
             });
     };
@@ -87,14 +107,14 @@ export const TaskForm = () => {
     const months = Array.from({ length: 12 }, (_, index) => index + 1);     // 1月から12月
     const days = Array.from({ length: 31 }, (_, index) => index + 1);     // 1日から31日
 
-
     // CSS短縮宣言
     const borderstyle = "border border-gray-300 rounded-md shadow-sm text-lg";
     const selectStyle = "text-center bg-gray-400 text-white";
 
     const markStyle = "text-black text-xl text-red-800";
 
-
+    // コンポーネントの初回レンダリング時にユーザー情報を取得
+    
     return (
         <div className="max-w-4xl mx-auto mt-10
          p-4 bg-indigo-100 shadow-lg rounded-lg flex flex-col">
@@ -286,29 +306,6 @@ export const TaskForm = () => {
                     </div>
                 </div>
 
-
-                {/* ユーザ機能 仮IDだけ渡す用 */}
-                <div className="mb-2 flex flex-col items-center justify-center">
-                    <div className="flex flex-col items-left w-4/5 mb-4 max-w-4/5">
-                        <label htmlFor="user_id" className="block text-lg font-medium text-green-700">
-                            ユーザーの機能 (仮) <span className="text-xs">※</span>
-                        </label>
-                        <select
-                            id="user_id"
-                            value={userId}
-                            onChange={(e) => setUserId(e.target.value)}
-                            required
-                            className="w-1/5 ml-0 bg-teal-100
-                        rounded-md text-lg border-2 border-blue-500"
-                        >
-                            {users.map((user) => (
-                                <option key={user.id} value={user.id} className="text-center">
-                                    {user.name}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                </div>
 
                 <p className="text-right"><span className={markStyle}>※</span>は選択必須項目</p>
 
