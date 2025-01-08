@@ -1,7 +1,7 @@
 import React from "react";
 
 //ルーティング reacr-router-dom
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom"
 
 import { MyLink } from "./components/MyLink";
 
@@ -14,6 +14,8 @@ import { List2 } from "./components/List2";
 
 import { UserCreate } from "./components/UserCreate";
 import { Login } from "./components/Login";
+
+
 
 export const App = () => {
   return (
@@ -30,9 +32,9 @@ export const App = () => {
           <Route path="/listuser" element={<TaskForUser></TaskForUser>} />
 
           <Route path="/usercreate" element={<UserCreate></UserCreate>} />
- 
-          <Route path="/login" element= {<Login></Login>}/>
 
+          <Route path="/login" element={<Login></Login>} />
+          
 
           {/* リスト2 全体のタスク表示と編集更新 */}
           {/* <List2></List2> */}
@@ -43,9 +45,18 @@ export const App = () => {
 
           {/* 新規作成 入力フォーム */}
           {/* <TaskForm></TaskForm> */}
+
+          {/* "/"にだけ表示したいコンテンツ */}
+          <Route path="/" element={
+            <div>
+              <h1>Hello</h1>
+              <p>やあ</p>
+            </div>
+          }/>
+
         </Routes >
       </Router>
-      説明を書いていく
+
     </>
   );
 }

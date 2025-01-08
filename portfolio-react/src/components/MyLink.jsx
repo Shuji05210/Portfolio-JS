@@ -22,7 +22,10 @@ export const MyLink = () => {
         <div>
             <nav className="mt-4 mb-6 bg-green-100">
                 <ul className="flex justify-center text-xl font-bold space-x-10">
-
+                    
+                    <li className={`${commonCss} ${HomeCss}`}>
+                        <Link to="/">HOME</Link></li>
+                    
                     <li className={`${commonCss} ${InputCss}`}>
                         <Link to="/taskform">入力フォーム</Link></li>
 
@@ -31,9 +34,6 @@ export const MyLink = () => {
 
                     <li className={`${commonCss} ${ListUserCss}`}>
                         <Link to="/listuser">ID個別表示</Link></li>
-
-                    <li className={`${commonCss} ${HomeCss}`}>
-                        <Link to="/">HOME</Link></li>
 
                     <li className={`${commonCss} ${LoginCss}`}>
                         <Link to="/login">ログイン</Link></li>
