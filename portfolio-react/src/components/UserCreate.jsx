@@ -6,30 +6,39 @@ export const UserCreate = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordConfirmation, setPasswordConfirmation] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const userdata = {
-        name,
-        email,
-        password,
-    }
 
     const handleRegister = async (e) => {
         e.preventDefault();
 
+        if (password !== passwordConfirmation) {
+            setErrorMessage('Password が確認用と一致していません');
+            return;
+        }
+
         try {
+            const userdata = {
+                name,
+                email,
+                password,
+            }
+
             await axios.post('http://127.0.0.1:8000/api/users', userdata);
 
             console.log('ユーザー作成に成功', userdata);
+            alert("どう゛ろ゛ぐに゛ぜい゛ごう゛した");
 
             //入力フォーム初期化
             setName('');
             setEmail('');
             setPassword('');
+            setPasswordConfirmation('');
 
         } catch (err) {
-            setError('登録失敗');
+            setError('登録に失敗');
         }
     };
 
@@ -47,6 +56,7 @@ export const UserCreate = () => {
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
+                            placeholder='登録するユーザー名を入力'
                             className='w-1/2 p-1 mt-1 border border-gray-300 rounded-md
                          focus:outline-none focus:ring-2 focus:ring-orange-500'
                         />
@@ -59,31 +69,48 @@ export const UserCreate = () => {
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            placeholder='登録するメールアドレスを入力'
                             className='w-1/2 p-1 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500'
                         />
                     </div>
 
-                    <div className='mb-10 flex justify-center items-center space-x-4 mr-20'>
-                        <label htmlFor="password" className="text-sm font-medium text-gray-700 w-28">パスワード(Password)</label>
+                    <div className='mb-5 flex justify-center items-center space-x-4 mr-20'>
+                        <label htmlFor="password" className="text-sm font-medium text-gray-700 w-28">登録パスワード(Password)</label>
                         <input
                             id='password'
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            placeholder='6文字以上のパスワードを入力'
+                            className='w-1/2 p-1 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500'
+                        />
+                    </div>
+
+                    <div className='mb-12 flex justify-center items-center space-x-4 mr-20'>
+                        <label htmlFor="pconfir" className="text-sm font-medium text-gray-700 w-28">
+                            <span className='text-red-800 text-xl'>※確認</span>
+                            </label>
+                        <input
+                            id='pconfir'
+                            type="password"
+                            value={passwordConfirmation}
+                            onChange={(e) => setPasswordConfirmation(e.target.value)}
+                            required
+                            placeholder='確認のため､パスワードを再度入力'
                             className='w-1/2 p-1 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500'
                         />
                     </div>
 
                     <button
                         type="submit"
-                        className="w-1/3 p-2 bg-orange-400 text-white rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500">登録
+                        className="w-1/3 p-2 bg-orange-400 text-white rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500">登録する
                     </button>
                     
                 </form>
                 {error && <p>{error}</p>}
             </div>
             <p className='text-gray-500 text-center mt-7'>※パスワードは6文字以上の任意の文字列<br/>
-            メールアドレスは ~@ の形式</p>
+            メールアドレスは ~ @ ~ の形式のみ登録可</p>
 
 
         </>

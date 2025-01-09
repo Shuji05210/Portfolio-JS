@@ -48,9 +48,9 @@ export const App = () => {
 
           {/* "/"にだけ表示したいコンテンツ */}
           <Route path="/" element={
-            <div>
-              <h1>Hello</h1>
-              <p>やあ</p>
+            <div className="text-center">
+              <h1>HOME</h1>
+              <p>トップページを表示しています</p>
             </div>
           }/>
 

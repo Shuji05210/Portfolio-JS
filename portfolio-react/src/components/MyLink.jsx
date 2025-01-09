@@ -43,6 +43,7 @@ export const MyLink = () => {
 
                 </ul>
             </nav>
+            
             <p className={`${textCss}`}>
                 現在のURLは&nbsp;&nbsp;
                 <span className={`${urlCss}`}>{location.pathname}{location.search}{location.hash}</span>
