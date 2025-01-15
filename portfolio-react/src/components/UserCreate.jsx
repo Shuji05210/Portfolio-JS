@@ -88,7 +88,7 @@ export const UserCreate = () => {
 
                     <div className='mb-12 flex justify-center items-center space-x-4 mr-20'>
                         <label htmlFor="pconfir" className="text-sm font-medium text-gray-700 w-28">
-                            <span className='text-red-800 text-xl'>※確認</span>
+                            <span className='text-red-800 text-lg'>※再度確認</span>
                             </label>
                         <input
                             id='pconfir'

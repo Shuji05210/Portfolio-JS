@@ -17,7 +17,8 @@ export const MyLink = () => {
     const HomeCss = location.pathname !== "/" ? "text-green-600 hover:bg-green-600" : "text-white bg-blue-600";
     const LoginCss = location.pathname !== "/login" ? "text-green-600 hover:bg-green-600" : "text-white bg-blue-600";
     const UserCreateCss = location.pathname !== "/usercreate" ? "text-green-600 hover:bg-green-600" : "text-white bg-blue-600";
-
+    const UserDeleteCss = location.pathname !== "/userdelete" ? "text-green-600 hover:bg-green-600" : "text-white bg-blue-600";
+    
     return (
         <div>
             <nav className="mt-4 mb-6 bg-green-100">
@@ -40,6 +41,9 @@ export const MyLink = () => {
 
                     <li className={`${commonCss} ${UserCreateCss}`}>
                         <Link to="/usercreate">ユーザ登録</Link></li>
+
+                    <li className={`${commonCss} ${UserDeleteCss}`}>
+                        <Link to="/userlist">ユーザ一覧</Link></li>
 
                 </ul>
             </nav>

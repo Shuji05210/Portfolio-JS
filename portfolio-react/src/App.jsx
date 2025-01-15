@@ -13,6 +13,7 @@ import { TaskForUser } from "./components/TaskForUser";
 import { List2 } from "./components/List2";
 
 import { UserCreate } from "./components/UserCreate";
+import { ResistUserList } from "./components/ResistUserList"; 
 import { Login } from "./components/Login";
 
 
@@ -34,17 +35,8 @@ export const App = () => {
           <Route path="/usercreate" element={<UserCreate></UserCreate>} />
 
           <Route path="/login" element={<Login></Login>} />
-          
+          <Route path="/userdelete" element={<ResistUserList></ResistUserList>} />
 
-          {/* リスト2 全体のタスク表示と編集更新 */}
-          {/* <List2></List2> */}
-
-
-          {/* ユーザー個別表示 + 編集機能 */}
-          {/* <TaskForUser></TaskForUser> */}
-
-          {/* 新規作成 入力フォーム */}
-          {/* <TaskForm></TaskForm> */}
 
           {/* "/"にだけ表示したいコンテンツ */}
           <Route path="/" element={
@@ -52,9 +44,9 @@ export const App = () => {
               <h1>HOME</h1>
               <p>トップページを表示しています</p>
             </div>
-          }/>
+          } />
 
-        </Routes >
+        </Routes>
       </Router>
 
     </>
