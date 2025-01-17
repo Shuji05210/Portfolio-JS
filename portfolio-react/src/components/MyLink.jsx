@@ -22,7 +22,7 @@ export const MyLink = () => {
     return (
         <div>
             <nav className="mt-4 mb-6 bg-green-100">
-                <ul className="flex justify-center text-xl font-bold space-x-10">
+                <ul className="flex justify-center text-xl font-bold space-x-4">
                     
                     <li className={`${commonCss} ${HomeCss}`}>
                         <Link to="/">HOME</Link></li>
@@ -43,7 +43,7 @@ export const MyLink = () => {
                         <Link to="/usercreate">ユーザ登録</Link></li>
 
                     <li className={`${commonCss} ${UserDeleteCss}`}>
-                        <Link to="/userlist">ユーザ一覧</Link></li>
+                        <Link to="/userdelete">ユーザ一覧</Link></li>
 
                 </ul>
             </nav>
