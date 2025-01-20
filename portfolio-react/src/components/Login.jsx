@@ -6,14 +6,13 @@ export const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post('http://127.0.0.1:8000/api/login', {
-                email,
-                password,
+                email: email,
+                password: password,
             });
 
             // 成功した場合、トークンをローカルストレージに保存

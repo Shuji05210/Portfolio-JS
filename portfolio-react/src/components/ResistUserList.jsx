@@ -40,6 +40,12 @@ export const ResistUserList = () => {
         setEditingUserId(null);
     };
 
+    // 日付を日本フォーマットに
+    const formatDate = (timestamp) => {
+        const date = new Date(timestamp);
+        return date.toLocaleDateString('ja-JP'); // 日本のフォーマットに変換
+    };
+
     return (
         <div className="w-1/2 mx-auto text-lg">
             <h2 className="text-xl font-semibold mb-4 text-center">登録ユーザー一覧</h2>
@@ -52,11 +58,14 @@ export const ResistUserList = () => {
                         <th className="px-4 py-2 text-left text-sm font-semibold
                         text-gray-600 border-b">名前</th>
 
-                        <th className="px-4 py-2 text-left text-sm font-semibold
+                        <th className="px-2 py-2 text-left text-sm font-semibold
                          text-gray-600 border-b">Email</th>
 
                         <th className="px-4 py-2 text-center text-sm font-semibold
                          text-gray-600 border-b">操作</th>
+
+                        <th className="py-2 text-center text-sm font-semibold
+                         text-gray-600 border-b">登録日</th>
 
                     </tr>
                 </thead>
@@ -70,7 +79,7 @@ export const ResistUserList = () => {
                                 {user.name}</td>
                             <td className="px-4 py-2 text-lg text-gray-800 border-b">
                                 {user.email}</td>
-                            <td className="px-4 py-2 text-center">
+                            <td className="px-3 py-2 text-center">
                                 <button
                                     className="bg-yellow-500 text-white py-1 px-3 rounded hover:bg-yellow-600"
                                     onClick={() => handleEdit(user.id)}
@@ -81,6 +90,8 @@ export const ResistUserList = () => {
                                 <UserDelete userId={user.id} onDelete={handleDelete}/>
 
                             </td>
+                            <td className="py-2 text-lg text-center text-gray-800 border-b">
+                                {formatDate(user.created_at)}</td>
                         </tr>
                     ))}
                 </tbody>

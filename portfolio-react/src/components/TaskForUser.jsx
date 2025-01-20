@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import { calculateDaysRemaining } from './calculateDaysRemaining';
@@ -54,7 +54,7 @@ export const TaskForUser = () => {
 
         console.log("編集作業に入った");
     };
-
+    
 
     return (
         <>
@@ -165,7 +165,8 @@ export const TaskForUser = () => {
             ) : (
                 <>
                     <div className="w-1/2 text-center mx-auto bg-orange-200 p-4 mt-10 rounded-xl">
-                        <p className="bg-white text-xl font-bold">表示対象となるタスクがありません</p>
+                        <p className="bg-white text-xl font-bold">
+                            表示対象となるタスクがありません</p>
                     </div>
                 </>
             )}

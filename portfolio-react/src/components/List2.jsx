@@ -114,13 +114,15 @@ export const List2 = () => {
                             <div className={textStyle} >
                                 期日: <span className="text-rose-500 text-2xl">
                                     {task.due_date} </span>
-                                (残り日数 <span className='text-2xl text-rose-700'>{calculateDaysRemaining(task.due_date)}</span> 日)
+                                (残り日数 <span className='text-2xl text-rose-700'>
+                                    {calculateDaysRemaining(task.due_date)}</span> 日)
 
                                 / 作成日: <span className="text-green-600 text-2xl">
                                     {formatDate(task.created_at)}
                                 </span></div>
 
-                            <p className={textStyle} >最終更新日: <span className='text-indigo-700 text-2xl'>{formatDate(task.updated_at)}</span></p>
+                            <p className={textStyle} >最終更新日: <span className='text-indigo-700 text-2xl'>
+                                {formatDate(task.updated_at)}</span></p>
 
                             <p className={textStyle} >
                                 ユーザー情報 [ ID:<span className="text-green-600 text-2xl">

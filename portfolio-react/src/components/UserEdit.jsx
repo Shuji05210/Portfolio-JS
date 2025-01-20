@@ -7,18 +7,18 @@ export const UserEdit = ({ userId, onSave, onCancel }) => {
     const [error, setError] = useState('');
 
     // ユーザー情報を取得してフォームにセットする
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const response = await axios.get(`http://127.0.0.1:8000/api/users/${userId}`);
-                setUser(response.data); // 編集用にセットする
-            } catch (error) {
-                setError('ユーザー情報の取得に失敗しました');
-            }
-        };
+    // useEffect(() => {
+    //     const fetchUser = async () => {
+    //         try {
+    //             const response = await axios.get(`http://127.0.0.1:8000/api/users/${userId}`);
+    //             setUser(response.data); // 編集用にセットする
+    //         } catch (error) {
+    //             setError('ユーザー情報の取得に失敗しました');
+    //         }
+    //     };
 
-        fetchUser();
-    }, [userId]); // userIdが変わるたびに再度ユーザー情報を取得
+    //     fetchUser();
+    // }, [userId]); // userIdが変わるたびに再度ユーザー情報を取得
 
     // 入力値が変更されたときのハンドラー
     const handleChange = (e) => {
