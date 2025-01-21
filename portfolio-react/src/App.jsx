@@ -16,6 +16,8 @@ import { UserCreate } from "./components/UserCreate";
 import { ResistUserList } from "./components/ResistUserList"; 
 import { Login } from "./components/Login";
 
+import { TaskFetcher } from "./components/TaskForU2";
+
 
 
 export const App = () => {

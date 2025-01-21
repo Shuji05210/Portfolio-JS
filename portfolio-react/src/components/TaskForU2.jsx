@@ -5,7 +5,7 @@ import { calculateDaysRemaining } from './calculateDaysRemaining';
 import { Change } from "./Change";
 import { Delete } from "./Delete";
 
-export const TaskForUser = () => {
+export const TaskFetcher = () => {
     const [users, setUsers] = useState([]); // ユーザーリスト
     const [userId, setUserId] = useState(''); // 選択されたユーザーID
     const [tasks, setTasks] = useState([]); // タスクリスト
@@ -79,13 +79,14 @@ export const TaskForUser = () => {
                 <h1 className="text-blue-800 text-center text-xl font-bold mb-3">
                     指定したユーザーIDの タスクのみを表示</h1>
 
+                <label htmlFor="userId" className="text-lg font-medium mb-2">ユーザーIDを選択</label>
                 <select
                     id="userId"
                     value={userId}
                     onChange={(e) => setUserId(e.target.value)}
-                    className="mx-auto w-1/5 text-center py-2 my-6 border-2 border-blue-300 hover:border-blue-600 rounded-md flex"
+                    className="mx-auto w-1/7 text-center py-2 my-6 border-2 border-blue-300 rounded-md flex"
                 >
-                    <option value="" className="font-bold bg-gray-500 text-white">---User IDを選択---</option>
+                    <option value="">--IDを選択--</option>
                     {users.map(user => (
                         <option key={user.id} value={user.id}>
                             {user.id}
@@ -95,9 +96,7 @@ export const TaskForUser = () => {
 
                 <button
                     onClick={fetchParentTasks}
-                    className="border-red-200 bg-white
-                    hover:bg-orange-200 hover:border-red-400 hover:font-bold
-                     border-2 p-2 rounded-lg"
+                    className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700"
                     disabled={loading}
                 >
                     {loading ? 'データを取得中...' : 'データを取得'}

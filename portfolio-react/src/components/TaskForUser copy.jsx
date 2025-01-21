@@ -6,33 +6,16 @@ import { Change } from "./Change";
 import { Delete } from "./Delete";
 
 export const TaskForUser = () => {
-    const [users, setUsers] = useState([]); // ユーザーリスト
-    const [userId, setUserId] = useState(''); // 選択されたユーザーID
-    const [tasks, setTasks] = useState([]); // タスクリスト
-    const [error, setError] = useState(null); // エラーメッセージ
-    const [loading, setLoading] = useState(false); // ローディング状態
+
+    const [userId, setUserId] = useState(1); // 初期値は1
+    const [tasks, setTasks] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const [editingTaskId, setEditingTaskId] = useState(null); // 編集するタスクのID
 
-
-    // ユーザーIDリストを取得
-    useEffect(() => {
-        axios.get('http://localhost:8000/api/users')
-            .then(response => {
-                setUsers(response.data);
-            })
-            .catch(error => {
-                console.error('ユーザーIDの取得に失敗しました', error);
-            });
-    }, []);
-
-    // タスクを取得する関数
+    // タスク取得関数
     const fetchParentTasks = async () => {
-        if (!userId) {
-            setError("ユーザーIDを選択してください");
-            return;
-        }
-
         setLoading(true);
         setError(null);
 
@@ -71,7 +54,7 @@ export const TaskForUser = () => {
 
         console.log("編集作業に入った");
     };
-
+    
 
     return (
         <>
@@ -79,50 +62,50 @@ export const TaskForUser = () => {
                 <h1 className="text-blue-800 text-center text-xl font-bold mb-3">
                     指定したユーザーIDの タスクのみを表示</h1>
 
+                {/* セレクトボックス */}
+                <label className="text-xl mr-2">User ID</label>
                 <select
-                    id="userId"
+                    className="w-16 text-center text-xl border-2 mr-6 px-2"
                     value={userId}
-                    onChange={(e) => setUserId(e.target.value)}
-                    className="mx-auto w-1/5 text-center py-2 my-6 border-2 border-blue-300 hover:border-blue-600 rounded-md flex"
-                >
-                    <option value="" className="font-bold bg-gray-500 text-white">---User IDを選択---</option>
-                    {users.map(user => (
-                        <option key={user.id} value={user.id}>
-                            {user.id}
+                    onChange={(e) =>
+                        setUserId(Number(e.target.value))}>
+                    {[...Array(15).keys()].map((i) => (
+                        <option className="py-2" key={i + 1} value={i + 1}>
+                            {i + 1}
                         </option>
                     ))}
                 </select>
 
+                {/* ボタン */}
                 <button
-                    onClick={fetchParentTasks}
                     className="border-red-200 bg-white
                     hover:bg-orange-200 hover:border-red-400 hover:font-bold
                      border-2 p-2 rounded-lg"
-                    disabled={loading}
-                >
-                    {loading ? 'データを取得中...' : 'データを取得'}
-                </button>
+                    onClick={fetchParentTasks}>データを取得</button>
 
+                {/* ローディング中の表示 */}
+                {loading && <p className="text-2xl">読み込み中...</p>}
 
+                {/* エラーメッセージ */}
+                {error && <p style={{ color: "red" }}>{error}</p>}
             </div>
 
-            {error && <div className="text-red-500 mt-2 text-center">{error}</div>}
-
+            {/* タスクリスト */}
             {editingTaskId && <Change taskId={editingTaskId}
                 setEditingTaskId={setEditingTaskId} onSave={fetchParentTasks} />}
 
             {tasks.length > 0 ? (
-                tasks.map(task => (
+                tasks.map((task) => (
                     <div className="max-w-4xl mx-auto py-6" key={task.id}>
-                        <div className="list-disc pl-6 shadow-lg rounded-xl 
-                        space-y-6 pb-8 bg-indigo-100 pt-5 text-lg">
+
+                        <div className="list-disc pl-6 shadow-lg rounded-xl space-y-6
+                                                 pb-8 bg-indigo-100 pt-5 text-lg">
 
                             {/* 編集ボタン */}
                             <div className="flex justify-end mr-5">
                                 <button
-                                    className="w-20 h-10 bg-white text-base p-1 rounded-md
-                                     border-2 border-gray-300 hover:bg-green-200 hover:border-gray-600
-                                      hover:font-bold"
+                                    className="w-20 h-10 bg-white text-base p-1
+                                                        rounded-md border-2 border-gray-300 hover:bg-green-200 hover:border-gray-600 hover:font-bold"
                                     onClick={() => handleEditClick(task.id)}
                                 >編集</button>
 
@@ -177,7 +160,7 @@ export const TaskForUser = () => {
                                     タスク管理 ID : {task.id}</p>
                             </div>
                         </div>
-                    </div>
+                    </div >
                 ))
             ) : (
                 <>
@@ -185,7 +168,8 @@ export const TaskForUser = () => {
                         <p className="bg-white text-xl font-bold">
                             表示対象となるタスクがありません</p>
                     </div>
-                </>)}
+                </>
+            )}
 
         </>
     );
