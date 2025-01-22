@@ -67,12 +67,15 @@ export const ResistUserList = () => {
                         <th className="py-2 text-center text-sm font-semibold
                          text-gray-600 border-b">登録日</th>
 
+                        <th className="py-2 text-center text-sm font-semibold
+                         text-gray-600 border-b">最終更新日</th>
+
                     </tr>
                 </thead>
 
                 <tbody>
                     {users.map(user => (
-                        <tr key={user.id} className="hover:bg-gray-50">
+                        <tr key={user.id} className="hover:bg-gray-100">
                             <td className="px-4 py-2 text-xl text-gray-800 border-b">
                                 {user.id}</td>
                             <td className="px-4 py-2 text-xl text-gray-800 border-b">
@@ -81,17 +84,20 @@ export const ResistUserList = () => {
                                 {user.email}</td>
                             <td className="px-3 py-2 text-center">
                                 <button
-                                    className="bg-yellow-500 text-white py-1 px-3 rounded hover:bg-yellow-600"
+                                    className="bg-gray-400 text-white text-xl py-1 px-3 rounded hover:bg-gray-600"
                                     onClick={() => handleEdit(user.id)}
                                 >
                                     編集
                                 </button>
 
-                                <UserDelete userId={user.id} onDelete={handleDelete}/>
+                                <UserDelete userId={user.id} userName={user.name} onDelete={handleDelete}/>
 
                             </td>
                             <td className="py-2 text-lg text-center text-gray-800 border-b">
                                 {formatDate(user.created_at)}</td>
+                            
+                            <td className="py-2 text-lg text-center text-gray-800 border-b">
+                                {formatDate(user.updated_at)}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -100,6 +106,7 @@ export const ResistUserList = () => {
             {editingUserId && (
                 <UserEdit
                     userId={editingUserId}
+                    userName={users.name}
                     onSave={handleSave}
                     onCancel={handleCancelEdit}
                 />

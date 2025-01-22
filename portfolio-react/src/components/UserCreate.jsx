@@ -46,7 +46,7 @@ export const UserCreate = () => {
         <>
             <div className='max-w-2xl text-center mx-auto bg-orange-200 p-4 mt-10 rounded-xl text-center'>
 
-                <h2 className='text-xl font-semibold mb-5'>新規ユーザー登録</h2>
+                <h2 className='text-xl font-semibold mb-5 text-orange-800'>新規ユーザー登録</h2>
 
                 <form onSubmit={handleRegister}>
                     <div className='mb-5 flex justify-center items-center space-x-4 mr-20'>
@@ -96,7 +96,7 @@ export const UserCreate = () => {
                             value={passwordConfirmation}
                             onChange={(e) => setPasswordConfirmation(e.target.value)}
                             required
-                            placeholder='確認のため､パスワードを再度入力'
+                            placeholder='パスワードを再度入力'
                             className='w-1/2 p-1 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500'
                         />
                     </div>

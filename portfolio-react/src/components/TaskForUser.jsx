@@ -83,9 +83,11 @@ export const TaskForUser = () => {
                     id="userId"
                     value={userId}
                     onChange={(e) => setUserId(e.target.value)}
-                    className="mx-auto w-1/5 text-center py-2 my-6 border-2 border-blue-300 hover:border-blue-600 rounded-md flex"
-                >
-                    <option value="" className="font-bold bg-gray-500 text-white">---User IDを選択---</option>
+                    className="mx-auto w-full-1/2 text-center py-2 my-6 border-2 border-blue-300 
+                    hover:border-blue-600 rounded-md flex">
+                    <option value="" className="font-bold bg-gray-500 text-white">
+                    ---User IDを選択---</option>
+                    
                     {users.map(user => (
                         <option key={user.id} value={user.id}>
                             {user.id}

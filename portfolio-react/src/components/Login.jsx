@@ -10,7 +10,7 @@ export const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/login', {
+            const response = await axios.post('http://127.0.0.1:8000/api/users', {
                 email: email,
                 password: password,
             });
@@ -57,7 +57,7 @@ export const Login = () => {
                         className='w-1/2 p-1 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500'
                     />
                 </div>
-
+                
                 <button
                     type="submit"
                     className="w-1/3 p-2 bg-orange-400 text-white rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500">

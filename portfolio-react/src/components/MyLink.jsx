@@ -12,12 +12,12 @@ export const MyLink = () => {
     //各ページ CSS定義
     const InputCss = location.pathname !== "/taskform" ? "text-green-600 hover:bg-green-600" : "text-white bg-blue-600";
     const ListCss = location.pathname !== "/list" ? "text-green-600 hover:bg-green-600" : "text-white bg-blue-600";
-    const ListUserCss = location.pathname !== "/listuser" ? "text-green-600 hover:bg-green-600" : "text-white bg-blue-600";
+    const ListUserCss = location.pathname !== "/taskuser" ? "text-green-600 hover:bg-green-600" : "text-white bg-blue-600";
 
     const HomeCss = location.pathname !== "/" ? "text-green-600 hover:bg-green-600" : "text-white bg-blue-600";
     const LoginCss = location.pathname !== "/login" ? "text-green-600 hover:bg-green-600" : "text-white bg-blue-600";
     const UserCreateCss = location.pathname !== "/usercreate" ? "text-green-600 hover:bg-green-600" : "text-white bg-blue-600";
-    const UserDeleteCss = location.pathname !== "/userdelete" ? "text-green-600 hover:bg-green-600" : "text-white bg-blue-600";
+    const UserListCss = location.pathname !== "/userlist" ? "text-green-600 hover:bg-green-600" : "text-white bg-blue-600";
     
     return (
         <div>
@@ -34,7 +34,7 @@ export const MyLink = () => {
                         <Link to="/list">タスク一覧</Link></li>
 
                     <li className={`${commonCss} ${ListUserCss}`}>
-                        <Link to="/listuser">ID個別表示</Link></li>
+                        <Link to="/taskuser">ID個別表示</Link></li>
 
                     <li className={`${commonCss} ${LoginCss}`}>
                         <Link to="/login">ログイン</Link></li>
@@ -42,8 +42,9 @@ export const MyLink = () => {
                     <li className={`${commonCss} ${UserCreateCss}`}>
                         <Link to="/usercreate">ユーザ登録</Link></li>
 
-                    <li className={`${commonCss} ${UserDeleteCss}`}>
-                        <Link to="/userdelete">ユーザ一覧</Link></li>
+                    <li className={`${commonCss} ${UserListCss}`}>
+                        <Link to="/userlist">ユーザ一覧</Link></li>
+                        
 
                 </ul>
             </nav>

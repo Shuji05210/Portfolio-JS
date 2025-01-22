@@ -5,20 +5,7 @@ export const UserEdit = ({ userId, onSave, onCancel }) => {
     const [user, setUser] = useState({ name: '', email: '' });
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
-
-    // ユーザー情報を取得してフォームにセットする
-    // useEffect(() => {
-    //     const fetchUser = async () => {
-    //         try {
-    //             const response = await axios.get(`http://127.0.0.1:8000/api/users/${userId}`);
-    //             setUser(response.data); // 編集用にセットする
-    //         } catch (error) {
-    //             setError('ユーザー情報の取得に失敗しました');
-    //         }
-    //     };
-
-    //     fetchUser();
-    // }, [userId]); // userIdが変わるたびに再度ユーザー情報を取得
+    
 
     // 入力値が変更されたときのハンドラー
     const handleChange = (e) => {
@@ -54,7 +41,7 @@ export const UserEdit = ({ userId, onSave, onCancel }) => {
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label className="block mb-2" htmlFor="name">
-                            名前
+                            名前 [変更前{}]
                         </label>
                         <input
                             type="text"
@@ -68,7 +55,7 @@ export const UserEdit = ({ userId, onSave, onCancel }) => {
                     </div>
                     <div className="mb-4">
                         <label className="block mb-2" htmlFor="email">
-                            メール
+                            メール {}
                         </label>
                         <input
                             type="email"
