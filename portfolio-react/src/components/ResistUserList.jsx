@@ -7,7 +7,7 @@ import '../index.css';
 export const ResistUserList = () => {
     const [users, setUsers] = useState([]);
     const [editingUserId, setEditingUserId] = useState(null);
-
+    
     // ユーザー一覧を取得する
     useEffect(() => {
         const fetchUsers = async () => {
@@ -25,6 +25,7 @@ export const ResistUserList = () => {
     // ユーザー削除後にリストを更新
     const handleDelete = (deleteUserId) => {
         setUsers(users.filter(user => user.id !== deleteUserId));
+        Reload(); //リスト更新
     };
 
     const handleEdit = (userId) => {
@@ -34,6 +35,7 @@ export const ResistUserList = () => {
     const handleSave = (updatedUser) => {
         setUsers(users.map(user => (user.id === updatedUser.id ? updatedUser : user)));
         setEditingUserId(null);
+        Reload(); //リスト更新
     };
 
     const handleCancelEdit = () => {
@@ -46,9 +48,21 @@ export const ResistUserList = () => {
         return date.toLocaleDateString('ja-JP'); // 日本のフォーマットに変換
     };
 
+    //リスト更新 Usersテーブルのデータを再取得
+    const Reload = async () => {
+        try {
+            const response = await axios.get('http://127.0.0.1:8000/api/users');
+            setUsers(response.data);
+        } catch (error) {
+            console.error('ユーザー一覧の取得に失敗しました', error);
+        }
+    
+    }
+
+
     return (
         <div className="w-1/2 mx-auto text-lg">
-            <h2 className="text-xl font-semibold mb-4 text-center">登録ユーザー一覧</h2>
+            <h2 className="text-xl font-semibold mb-4 text-center">登録ユーザ一覧</h2>
             <table className="min-w-full table-auto border-collapse">
                 <thead>
                     <tr className="bg-gray-100">

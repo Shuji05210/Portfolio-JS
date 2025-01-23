@@ -35,17 +35,16 @@ export const App = () => {
 
           <Route path="/taskuser" element={<TaskForUser></TaskForUser>} />
 
-          <Route path="/usercreate" element={<UserCreate></UserCreate>} />
-
           <Route path="/login" element={<Login></Login>} />
+          <Route path="/usercreate" element={<UserCreate></UserCreate>} />
           <Route path="/userlist" element={<ResistUserList></ResistUserList>} />
 
 
           {/* "/"にだけ表示したいコンテンツ */}
           <Route path="/" element={
             <>
-              <div className="text-center">
-                <p>現在 HOMEページを表示しています</p>
+              <div className="text-center text-lg">
+                <p><span className="text-red-500">TOP</span> のページを表示しています</p>
               </div>
 
               <div className="w-1/2 mx-auto flex justify-center container
@@ -71,17 +70,9 @@ export const App = () => {
                       ID個別表示</a></li>
                   </ul>
 
-                  <ul class={LiCss}>
-                    <li><a href="#" class={LiCss2}>
-                      リンク5</a></li>
-
-                    <li><a href="#" class={LiCss2}>
-                      リンク6</a></li>
-                  </ul>
-
                 </div>
                 <div class="flex-col text-gray-700 mt-4 w-full">
-                  <p>ログイン機能</p>
+                  <p>ログイン機能(仮)</p>
                   <p>ユーザの登録機能</p>
                   <p>登録ユーザ一覧表示</p>
 

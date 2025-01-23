@@ -25,7 +25,7 @@ export const MyLink = () => {
                 <ul className="flex justify-center text-xl font-bold space-x-4">
                     
                     <li className={`${commonCss} ${HomeCss}`}>
-                        <Link to="/">HOME</Link></li>
+                        <Link to="/">TOP</Link></li>
                     
                     <li className={`${commonCss} ${InputCss}`}>
                         <Link to="/taskform">入力フォーム</Link></li>
