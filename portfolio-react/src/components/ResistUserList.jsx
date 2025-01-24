@@ -32,10 +32,10 @@ export const ResistUserList = () => {
         setEditingUserId(userId);
     };
 
-    const handleSave = (updatedUser) => {
-        setUsers(users.map(user => (user.id === updatedUser.id ? updatedUser : user)));
+    const handleSave = () => {
         setEditingUserId(null);
         Reload(); //リスト更新
+        alert('更新できたよ');
     };
 
     const handleCancelEdit = () => {
@@ -120,7 +120,6 @@ export const ResistUserList = () => {
             {editingUserId && (
                 <UserEdit
                     userId={editingUserId}
-                    userName={users.name}
                     onSave={handleSave}
                     onCancel={handleCancelEdit}
                 />
