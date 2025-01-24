@@ -18,7 +18,7 @@ export const Login = () => {
             // 成功した場合、トークンをローカルストレージに保存
             localStorage.setItem('authToken', response.data.token);
             alert("ログインに成功");
-            //navigate('/taskform'); // ログイン後にタスクフォームに遷移
+            // navigate('/taskform'); // ログイン後にタスクフォームに遷移
         } catch (err) {
             setError('ログインに失敗しました');
         }
@@ -34,7 +34,7 @@ export const Login = () => {
 
                 <div className='mb-5 flex justify-center items-center space-x-4 mr-20'>
                     <label htmlFor="email"
-                    className="text-sm font-medium text-gray-700 w-28">
+                        className="text-sm font-medium text-gray-700 w-28">
                         メールアドレス(email)</label>
                     <input
                         id="email"
@@ -49,8 +49,8 @@ export const Login = () => {
                 </div>
 
                 <div className='mb-10 flex justify-center items-center space-x-4 mr-20'>
-                    <label htmlFor="password" 
-                    className="text-sm font-medium text-gray-700 w-28">
+                    <label htmlFor="password"
+                        className="text-sm font-medium text-gray-700 w-28">
                         パスワード(Password)</label>
                     <input
                         id='password'
@@ -63,7 +63,7 @@ export const Login = () => {
                          focus:outline-none focus:ring-2 focus:ring-orange-500'
                     />
                 </div>
-                
+
                 <button
                     type="submit"
                     className="w-1/3 p-2 bg-orange-400 text-white rounded-md

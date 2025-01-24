@@ -20,8 +20,9 @@ export const TaskForm = () => {
     const [month, setMonth] = useState("");
     const [day, setDay] = useState("");
 
-    const [color, setColor] = useState("");
+    // const [color, setColor] = useState("");
     
+    //期日 年,月,日の値を合わせる
     const getDueDate = () => {
         if (year && month && day) {
             return `${year}-${month}-${day}`;
@@ -56,7 +57,8 @@ export const TaskForm = () => {
     // React.useEffect(() => {
     //     getUserInfo();
     // }, []);
-
+    
+    
     // フォーム送信時の処理
     const handleSubmit = async (e) => {
         e.preventDefault(); //ページのリロードを防ぐ
