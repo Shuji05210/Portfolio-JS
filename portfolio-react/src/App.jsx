@@ -49,29 +49,29 @@ export const App = () => {
 
               <div className="w-1/2 mx-auto flex justify-center container
               mt-8 text-xl bg-blue-100 rounded-2xl">
-                <div class="container">
+                <div className="container">
 
-                  <ul class={LiCss}>
-                    <li><a href="/login" class={LiCss2}>
+                  <ul className={LiCss}>
+                    <li><a href="/login" className={LiCss2}>
                       ログイン</a></li>
 
-                    <li><a href="/usercreate" class={LiCss2}>
+                    <li><a href="/usercreate" className={LiCss2}>
                       ユーザ登録</a></li>
 
-                    <li><a href="/userlist" class={LiCss2}>
+                    <li><a href="/userlist" className={LiCss2}>
                       ユーザ一覧</a></li>
                   </ul>
 
-                  <ul class={LiCss}>
-                    <li><a href="list" class={LiCss2}>
+                  <ul className={LiCss}>
+                    <li><a href="list" className={LiCss2}>
                       タスク一覧</a></li>
 
-                    <li><a href="/taskuser" class={LiCss2}>
+                    <li><a href="/taskuser" className={LiCss2}>
                       ID個別表示</a></li>
                   </ul>
 
                 </div>
-                <div class="flex-col text-gray-700 mt-4 w-full">
+                <div className="flex-col text-gray-700 mt-4 w-full">
                   <p>ログイン機能(仮)</p>
                   <p>ユーザの登録機能</p>
                   <p>登録ユーザ一覧表示</p>

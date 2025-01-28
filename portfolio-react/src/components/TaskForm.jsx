@@ -21,7 +21,7 @@ export const TaskForm = () => {
     const [day, setDay] = useState("");
 
     // const [color, setColor] = useState("");
-    
+
     //期日 年,月,日の値を合わせる
     const getDueDate = () => {
         if (year && month && day) {
@@ -32,33 +32,33 @@ export const TaskForm = () => {
 
 
     // ユーザー情報を取得する処理（ログインチェック）
-    // const getUserInfo = () => {
-    //     const token = localStorage.getItem('authToken');
-    //     if (!token) {
-    //         navigate('/login'); // トークンがなければログインページへ遷移
-    //         return;
-    //     }
+    const getUserInfo = () => {
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            navigate('/login'); // トークンがなければログインページへ遷移
+            return;
+        }
 
-    //     axios
-    //         .get('http://127.0.0.1:8000/api/user', {
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //             },
-    //         })
-    //         .then((response) => {
-    //             setUser(response.data); // ログインユーザー情報の取得
-    //         })
-    //         .catch(() => {
-    //             navigate('/login'); // ユーザー情報取得に失敗した場合、ログインページに遷移
-    //         });
-    // };
+        axios
+            .get('http://127.0.0.1:8000/api/userinfo', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((response) => {
+                setUser(response.data); // ログインユーザー情報の取得
+            })
+            .catch(() => {
+                navigate('/login'); // ユーザー情報取得に失敗した場合、ログインページに遷移
+            });
+    };
 
-    // コンポーネントの初回レンダリング時にユーザー情報を取得
-    // React.useEffect(() => {
-    //     getUserInfo();
-    // }, []);
-    
-    
+
+    // //コンポーネントの初回レンダリング時にユーザー情報を取得
+    useEffect(() => {
+        getUserInfo();
+    }, []);
+
     // フォーム送信時の処理
     const handleSubmit = async (e) => {
         e.preventDefault(); //ページのリロードを防ぐ
@@ -81,6 +81,7 @@ export const TaskForm = () => {
             taskstate_id: taskstateId,
             category_id: categoryId,
         };
+        
 
 
         // LaravelのAPIにデータを送信

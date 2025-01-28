@@ -6,6 +6,7 @@ export const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -18,7 +19,7 @@ export const Login = () => {
             // 成功した場合、トークンをローカルストレージに保存
             localStorage.setItem('authToken', response.data.token);
             alert("ログインに成功");
-            // navigate('/taskform'); // ログイン後にタスクフォームに遷移
+            navigate('/taskform'); // ログイン後にタスクフォームに遷移
         } catch (err) {
             setError('ログインに失敗しました');
         }
