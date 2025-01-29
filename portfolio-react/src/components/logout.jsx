@@ -7,7 +7,7 @@ export const Logout = () => {
 
     const handleLogout = async () => {
         // トークンがlocalStorageから取得されるタイミングを確認
-        const token = localStorage.getItem('authToken');  // authTokenを取得
+        const token = localStorage.getItem('authToken');  // authTokenを取得 (ユーザーを認証する情報)
         console.log("取得トークン: ", token);  // コンソールにログを出力
 
         if (!token) {
@@ -39,7 +39,8 @@ export const Logout = () => {
         } catch (err) {
             console.error("ログアウトに失敗しました: ", err);  // エラーログ
             alert("ログアウトに失敗しました。もう一度試してください。");
-        }}
+        }
+    }
 
     return <button onClick={handleLogout}>ログアウト</button>;
 };

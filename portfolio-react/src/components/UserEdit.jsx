@@ -47,10 +47,16 @@ export const UserEdit = ({ userId, onSave, onCancel }) => {
 
         try {
             // ユーザー情報を更新
-            await axios.put(`http://127.0.0.1:8000/api/users/${userId}`, user);
+            const response = await axios.put(`http://127.0.0.1:8000/api/users/${userId}`, user);
             onSave(); // 親コンポーネント内での動作処理
         } catch (error) {
-            setError('ユーザー情報の更新に失敗しました');
+            // サーバーから返されたエラーメッセージを表示
+            if (error.response && error.response.data) {
+                const errors = error.response.data.errors;
+                setError(errors ? Object.values(errors).join(', ') : 'ユーザー情報の更新に失敗しました');
+            } else {
+                setError('ユーザー情報の更新に失敗しました');
+            }
         } finally {
             setIsLoading(false);
         }

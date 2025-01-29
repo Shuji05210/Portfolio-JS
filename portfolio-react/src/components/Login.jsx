@@ -26,10 +26,10 @@ export const Login = () => {
     };
 
     return (
-        <div className='max-w-2xl text-center mx-auto bg-green-200
+        <div className='max-w-2xl text-center mx-auto bg-gray-200
          p-4 mt-10 rounded-xl text-center'>
 
-            <h2 className='text-xl font-semibold mb-5'>ログイン画面</h2>
+            <h2 className='text-indigo-700 text-xl font-semibold mb-5'>ログイン画面</h2>
 
             <form onSubmit={handleLogin}>
 
@@ -67,8 +67,8 @@ export const Login = () => {
 
                 <button
                     type="submit"
-                    className="w-1/3 p-2 bg-orange-400 text-white rounded-md
-                     hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    className="w-1/3 p-2 bg-indigo-300 text-white rounded-md
+                     hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                     ログイン
                 </button>
             </form>
