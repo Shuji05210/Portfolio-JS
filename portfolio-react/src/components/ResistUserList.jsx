@@ -59,6 +59,9 @@ export const ResistUserList = () => {
     
     }
 
+    // 編集中のユーザーを取得
+    const editingUser = users.find(user => user.id === editingUserId);
+
 
     return (
         <div className="w-1/2 mx-auto text-lg">
@@ -117,9 +120,11 @@ export const ResistUserList = () => {
                 </tbody>
             </table>
 
-            {editingUserId && (
+            {editingUserId && editingUser && (
                 <UserEdit
                     userId={editingUserId}
+                    userName={editingUser.name}
+                    userMail={editingUser.email}
                     onSave={handleSave}
                     onCancel={handleCancelEdit}
                 />

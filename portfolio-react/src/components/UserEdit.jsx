@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export const UserEdit = ({ userId, onSave, onCancel }) => {
+export const UserEdit = ({ userId, userName, userMail, onSave, onCancel }) => {
     const [user, setUser] = useState({
         name: '',
         email: '',
@@ -62,15 +62,16 @@ export const UserEdit = ({ userId, onSave, onCancel }) => {
         }
     };
 
+    const spanCss = `text-red-500 font-bold`;
+
     return (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
             <div className="bg-white p-6 rounded shadow-lg w-96">
                 <h3 className="text-xl font-semibold mb-4">ユーザー情報の編集</h3>
-                {error && <div className="text-red-500 mb-4">{error}</div>}
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label className="block mb-2" htmlFor="name">
-                            名前 [変更前{ }]
+                            名前 <br /> <span className={`${spanCss}`}>変更前</span> / [ {userName} ]
                         </label>
                         <input
                             type="text"
@@ -84,7 +85,7 @@ export const UserEdit = ({ userId, onSave, onCancel }) => {
                     </div>
                     <div className="mb-4">
                         <label className="block mb-2" htmlFor="email">
-                            メール { }
+                            メールアドレス <br /> <span className={`${spanCss}`}>変更前</span> / [ {userMail} ]
                         </label>
                         <input
                             type="email"
@@ -113,7 +114,7 @@ export const UserEdit = ({ userId, onSave, onCancel }) => {
                     </div>
 
                     <div className="mb-4">
-                        <label className="block mb-2" htmlFor= "password_confirmation">
+                        <label className="block mb-2" htmlFor="password_confirmation">
                             パスワード
                             <span className='text-red-800 text-lg ml-2'>(※再度確認)</span>
                         </label>
