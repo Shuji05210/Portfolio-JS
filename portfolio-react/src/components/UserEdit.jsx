@@ -10,8 +10,21 @@ export const UserEdit = ({ userId, userName, userMail, onSave, onCancel }) => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
-
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
+
+    const [updatePassword, setUpdatePassword] = useState(false); // パスワード更新のチェックボックス
+    
+
+    // userNameまたはuserMailが変更されたときにuserステートを更新
+    useEffect(() => {
+        // 初期データをセット
+        setUser({
+            name: userName,
+            email: userMail,
+            password: '',
+        });
+    }, [userName, userMail]);
+
 
     // 入力値が変更されたときのハンドラー
     const handleChange = (e) => {
@@ -27,6 +40,10 @@ export const UserEdit = ({ userId, userName, userMail, onSave, onCancel }) => {
         setPasswordConfirmation(e.target.value);
     };
 
+    const handleUpdatePasswordChange = () => {
+        setUpdatePassword((prev) => !prev);
+    };
+
     // フォーム送信時のハンドラー
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -39,13 +56,20 @@ export const UserEdit = ({ userId, userName, userMail, onSave, onCancel }) => {
             setIsLoading(false);
             return;
         }
-        if (!passwordConfirmation) {
+        if (!passwordConfirmation && updatePassword) {
             setError('確認用パスワードを入力してください');
             setIsLoading(false);
             return;
         }
 
         try {
+            const updatedUser = { ...user };
+
+            // パスワードが空でない場合のみ更新
+            if (!updatePassword) {
+                delete updatedUser.password;
+            }
+
             // ユーザー情報を更新
             const response = await axios.put(`http://127.0.0.1:8000/api/users/${userId}`, user);
             onSave(); // 親コンポーネント内での動作処理
@@ -62,16 +86,21 @@ export const UserEdit = ({ userId, userName, userMail, onSave, onCancel }) => {
         }
     };
 
-    const spanCss = `text-red-500 font-bold`;
+    const spanCss = `text-red-500 font-normal`;
+    const inputCss = `w-full border border-gray-300 px-3 py-2 rounded`;
+
+    const labelCss = `block mb-2 text-lg font-bold`;
+
 
     return (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
             <div className="bg-white p-6 rounded shadow-lg w-96">
-                <h3 className="text-xl font-semibold mb-4">ユーザー情報の編集</h3>
+                <h3 className="text-center text-2xl text-yellow-500 font-semibold mb-4">
+                    ユーザー情報の編集</h3>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
-                        <label className="block mb-2" htmlFor="name">
-                            名前 <br /> <span className={`${spanCss}`}>変更前</span> / [ {userName} ]
+                        <label className={`${labelCss}`} htmlFor="name">
+                            名前 (User Name) <br /> <span className={`${spanCss}`}>現在の登録名</span> / {userName}
                         </label>
                         <input
                             type="text"
@@ -79,13 +108,14 @@ export const UserEdit = ({ userId, userName, userMail, onSave, onCancel }) => {
                             name="name"
                             value={user.name}
                             onChange={handleChange}
-                            className="w-full border border-gray-300 px-3 py-2 rounded"
+                            className={`${inputCss}`}
+                            placeholder='変更後のユーザ名を入力'
                             required
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block mb-2" htmlFor="email">
-                            メールアドレス <br /> <span className={`${spanCss}`}>変更前</span> / [ {userMail} ]
+                        <label className={`${labelCss}`} htmlFor="email">
+                            メールアドレス ( Email ) <br /> <span className={`${spanCss}`}>現在の登録アドレス</span> / {userMail}
                         </label>
                         <input
                             type="email"
@@ -93,14 +123,15 @@ export const UserEdit = ({ userId, userName, userMail, onSave, onCancel }) => {
                             name="email"
                             value={user.email}
                             onChange={handleChange}
-                            className="w-full border border-gray-300 px-3 py-2 rounded"
+                            className={`${inputCss}`}
+                            placeholder='変更後のメールアドレスを入力'
                             required
                         />
                     </div>
 
                     <div className="mb-4">
-                        <label className="block mb-2" htmlFor="pass">
-                            パスワード
+                        <label className={`${labelCss}`} htmlFor="pass">
+                            パスワード (Password)
                         </label>
                         <input
                             id='password'
@@ -108,26 +139,44 @@ export const UserEdit = ({ userId, userName, userMail, onSave, onCancel }) => {
                             name='password'
                             value={user.password}
                             onChange={handleChange}
-                            className="w-full border border-gray-300 px-3 py-2 rounded"
+                            disabled={!updatePassword} // パスワード更新のチェックがない場合は入力不可
+                            className={`${inputCss}`}
+                            placeholder='6文字以上の任意の英数字記号'
                             required
                         />
+                    </div>
+                    
+
+                    {updatePassword && (
+                        <div className="mb-4">
+                            <label className={`${labelCss}`} htmlFor="password_confirmation">
+                                パスワード
+                                <span className='text-red-800 text-lg ml-2'>(※再度確認)</span>
+                            </label>
+                            <input
+                                id="password_confirmation"
+                                type="password"
+                                value={passwordConfirmation}
+                                onChange={handlePasswordConfirmationChange}
+                                required
+                                placeholder='パスワードを再度入力'
+                                className={`${inputCss}`}
+                            />
+                        </div>
+                    )}
+
+                    <div className='mb-5'>
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={updatePassword}
+                                onChange={handleUpdatePasswordChange}
+                                className=''
+                            />
+                            <span className='ml-2 text-red-800 underline underline-thickness-2 font-bold'>パスワードの更新する場合, チェック入れる</span>
+                        </label>
                     </div>
 
-                    <div className="mb-4">
-                        <label className="block mb-2" htmlFor="password_confirmation">
-                            パスワード
-                            <span className='text-red-800 text-lg ml-2'>(※再度確認)</span>
-                        </label>
-                        <input
-                            id="password_confirmation"
-                            type="password"
-                            value={passwordConfirmation}
-                            onChange={handlePasswordConfirmationChange}
-                            required
-                            placeholder='パスワードを再度入力'
-                            className="w-full border border-gray-300 px-3 py-2 rounded"
-                        />
-                    </div>
 
                     {/* エラーメッセージ */}
                     {error && (
@@ -142,7 +191,7 @@ export const UserEdit = ({ userId, userName, userMail, onSave, onCancel }) => {
                             className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
                             disabled={isLoading}
                         >
-                            {isLoading ? '更新中...' : 'ユーザ情報を更新'}
+                            {isLoading ? '更新中...' : '情報を更新'}
                         </button>
                         <button
                             type="button"
@@ -152,6 +201,7 @@ export const UserEdit = ({ userId, userName, userMail, onSave, onCancel }) => {
                             キャンセル
                         </button>
                     </div>
+                    
                 </form>
             </div>
         </div>

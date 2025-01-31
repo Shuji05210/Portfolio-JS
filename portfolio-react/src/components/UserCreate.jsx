@@ -57,6 +57,7 @@ export const UserCreate = () => {
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
+                            autoComplete="off"
                             placeholder='登録するユーザー名を入力'
                             className='w-1/2 p-1 mt-1 border border-gray-300 rounded-md
                          focus:outline-none focus:ring-2 focus:ring-orange-500'
@@ -71,6 +72,7 @@ export const UserCreate = () => {
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            autoComplete="off"
                             placeholder='登録するメールアドレスを入力'
                             className='w-1/2 p-1 mt-1 border border-gray-300 rounded-md
                              focus:outline-none focus:ring-2 focus:ring-orange-500'

@@ -42,6 +42,7 @@ export const Login = () => {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        autoComplete="off"
                         required
                         placeholder='メールアドレス を入力'
                         className='w-1/2 p-1 mt-1 border border-gray-300 rounded-md
@@ -58,6 +59,7 @@ export const Login = () => {
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        autoComplete="off"
                         required
                         placeholder='パスワード を入力'
                         className='w-1/2 p-1 mt-1 border border-gray-300 rounded-md
