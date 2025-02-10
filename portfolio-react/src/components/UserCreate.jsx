@@ -29,7 +29,7 @@ export const UserCreate = () => {
             await axios.post('http://127.0.0.1:8000/api/users', userdata);
 
             console.log('ユーザー作成に成功', userdata);
-            alert("どう゛ろ゛ぐに゛ぜい゛ごう゛した");
+            alert("ユーザーを作成しました");
 
             //入力フォーム初期化
             setName('');

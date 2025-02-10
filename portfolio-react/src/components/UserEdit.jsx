@@ -12,8 +12,9 @@ export const UserEdit = ({ userId, userName, userMail, onSave, onCancel }) => {
     const [error, setError] = useState('');
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
-    const [updatePassword, setUpdatePassword] = useState(false); // パスワード更新のチェックボックス
-    
+    // パスワード更新のチェックボックス
+    const [updatePassword, setUpdatePassword] = useState(false);
+
 
     // userNameまたはuserMailが変更されたときにuserステートを更新
     useEffect(() => {
@@ -145,7 +146,7 @@ export const UserEdit = ({ userId, userName, userMail, onSave, onCancel }) => {
                             required
                         />
                     </div>
-                    
+
 
                     {updatePassword && (
                         <div className="mb-4">
@@ -201,7 +202,7 @@ export const UserEdit = ({ userId, userName, userMail, onSave, onCancel }) => {
                             キャンセル
                         </button>
                     </div>
-                    
+
                 </form>
             </div>
         </div>
